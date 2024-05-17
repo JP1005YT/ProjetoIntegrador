@@ -23,14 +23,27 @@ const sqltManager = (function() {
         });
     }
     function insertItem(nome, payload, tags, callback) {
+        const tagsJson = JSON.stringify(tags)
         const query = 'INSERT INTO arquivos (nome, payload, tags) VALUES (?, ?, ?)';
-        db.run(query, [nome, payload, tags], function(err) {
+        db.run(query, [nome, payload, tagsJson], function(err) {
             if (err) {
                 console.error('Erro ao inserir item:', err.message);
                 callback(err);
             } else {
                 console.log(`Item inserido com sucesso, ID: ${this.lastID}`);
                 callback(null, this.lastID);
+            }
+        });
+    }
+    function deleteItem(id,callback){
+        const query = 'DELETE FROM arquivos WHERE id = ?';
+        db.run(query, [id], function(err) {
+            if (err) {
+                console.error('Erro ao deletar item:', err.message);
+                callback(err);
+            } else {
+                console.log(`Item com ID ${id} deletado com sucesso`);
+                callback(null, { message: 'Item deletado com sucesso', changes: this.changes });
             }
         });
     }
@@ -49,6 +62,7 @@ const sqltManager = (function() {
     return {
         getItems: getItems,
         insertItem: insertItem,
+        deleteItem: deleteItem,
         close: close
     };
 })();

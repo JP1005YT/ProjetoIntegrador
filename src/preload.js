@@ -7,7 +7,12 @@ const { contextBridge, ipcRenderer } = require('electron');
 // console.log(Aprende)
 
 var API = {
-    create : (jsonObj) => {
+    create : (name,blob,tags) => {
+        const jsonObj = {
+            name : name,
+            blob : blob,
+            tags : tags
+        }
         ipcRenderer.send('sqliteApi','create',jsonObj)
     },
     read : () => {
@@ -17,12 +22,21 @@ var API = {
         ipcRenderer.send('sqliteApi','update',id,jsonObj)
     },
     delete : (id)=>{
-        ipcRenderer.send('sqliteApi','delete',id)
+        const jsonObj = {
+            id : id
+        }
+        ipcRenderer.send('sqliteApi','delete',jsonObj)
     }
 }
 
 ipcRenderer.on('read-response', (event, response) => {
     console.log(response)
 });
+ipcRenderer.on('create-response',(event,response) => {
+    console.log(response)
+})
+ipcRenderer.on('delete-response',(event,response) => {
+    console.log(response)
+})
 
 contextBridge.exposeInMainWorld('preloadObject', API);

@@ -50,12 +50,24 @@ app.on('window-all-closed', () => {
 ipcMain.on("sqliteApi",(event,method,args) => {
   switch (method) {
     case 'create':
-      
+      if(typeof(args.name) === undefined || typeof(args.blob) === undefined || typeof(args.tags) === undefined){
+        event.reply('read-response',{err : "Invalid Value"})
+      }else{
+        sqltManager.insertItem(args.name, args.blob, args.tags, (err, lastID) => {
+          if (err) {
+            event.reply('create-response',{err : err})
+          } 
+          else {
+            event.reply('create-response',{data : lastID})
+          }
+        })
+         console.log(args)
+      }
     break;
     case 'read':
       sqltManager.getItems((err, rows) => {
         if (err) {
-            console.error('Erro ao buscar itens:', err.message);
+            event.reply('read-response',{err : err.message})
         } else {
             event.reply('read-response',{data : rows});
         }
@@ -65,18 +77,17 @@ ipcMain.on("sqliteApi",(event,method,args) => {
       
     break;
     case 'delete':
-      
+      sqltManager.deleteItem(args.id,(err,message) => {
+        if(err){
+          event.reply('delete-response',{err : err.message})
+        } else{
+          event.reply('delete-response',{msg : message})
+        }
+      })
     break;
     default:
       return {error : "method don't exists"}
   }
 })
-
-// sqltManager.insertItem('Meu Documento', Buffer.from('Conteúdo do arquivo'), 'importante,documento', (err, lastID) => {
-//   if (err) {
-//       console.error('Erro ao inserir item:', err.message);
-//   } else {
-//       console.log('Item inserido com sucesso, ID:', lastID);}
-//   })
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
