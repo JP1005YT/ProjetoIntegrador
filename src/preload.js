@@ -16,7 +16,12 @@ var API = {
         ipcRenderer.send('sqliteApi','create',jsonObj)
     },
     read : () => {
-        ipcRenderer.send('sqliteApi','read')
+        return new Promise((resolve,reject) => {
+            ipcRenderer.once('read-response',(event,response) => {
+                resolve(response)
+            })
+            ipcRenderer.send('sqliteApi','read')
+        })
     },
     update : (id,jsonObj) => {
         ipcRenderer.send('sqliteApi','update',id,jsonObj)
@@ -25,18 +30,13 @@ var API = {
         const jsonObj = {
             id : id
         }
-        ipcRenderer.send('sqliteApi','delete',jsonObj)
+        return new Promise((resolve,reject) => {
+            ipcRenderer.once('delete-response',(event,response) => {
+                resolve(resolve)
+            })
+            ipcRenderer.send('sqliteApi','delete',jsonObj)
+        })
     }
 }
-
-ipcRenderer.on('read-response', (event, response) => {
-    console.log(response)
-});
-ipcRenderer.on('create-response',(event,response) => {
-    console.log(response)
-})
-ipcRenderer.on('delete-response',(event,response) => {
-    console.log(response)
-})
 
 contextBridge.exposeInMainWorld('preloadObject', API);
