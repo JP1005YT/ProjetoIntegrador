@@ -11,15 +11,6 @@
     <script>
       var API
       API = window.preloadObject;
-
-      (async () => {
-          try {
-              const result = await API.read();
-              console.log(result); // Aqui você tem o resultado da leitura diretamente
-          } catch (error) {
-              console.error('Erro ao ler os dados:', error);
-          }
-      })();
     </script>
   </body>
 </html>

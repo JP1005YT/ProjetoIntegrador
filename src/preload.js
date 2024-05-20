@@ -13,7 +13,12 @@ var API = {
             blob : blob,
             tags : tags
         }
-        ipcRenderer.send('sqliteApi','create',jsonObj)
+        return new Promise((resolve,reject) => {
+            ipcRenderer.once('create-response',(event,response) => {
+                resolve(response)
+            })
+            ipcRenderer.send('sqliteApi','create',jsonObj)
+        })
     },
     read : () => {
         return new Promise((resolve,reject) => {
@@ -32,7 +37,7 @@ var API = {
         }
         return new Promise((resolve,reject) => {
             ipcRenderer.once('delete-response',(event,response) => {
-                resolve(resolve)
+                resolve(response)
             })
             ipcRenderer.send('sqliteApi','delete',jsonObj)
         })

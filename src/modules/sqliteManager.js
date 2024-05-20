@@ -1,7 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
 const sqltManager = (function() {
-    // Conectar ao banco de dados SQLite
     const db = new sqlite3.Database('./facu.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
         if (err) {
             console.error('Erro ao conectar ao banco de dados:', err.message);
@@ -9,8 +8,6 @@ const sqltManager = (function() {
             console.log('Conectado ao banco de dados SQLite.');
         }
     });
-
-    // Função para buscar dados da tabela 'itens'
     function getItems(callback) {
         const query = 'SELECT * FROM arquivos';
         db.all(query, [], (err, rows) => {
@@ -43,11 +40,10 @@ const sqltManager = (function() {
                 callback(err);
             } else {
                 console.log(`Item com ID ${id} deletado com sucesso`);
-                callback(null, { message: 'Item deletado com sucesso', changes: this.changes });
+                callback(null, { err: false, changes: this.changes });
             }
         });
     }
-    // Fechar a conexão com o banco de dados
     function close() {
         db.close((err) => {
             if (err) {
@@ -57,8 +53,6 @@ const sqltManager = (function() {
             }
         });
     }
-
-    // Retornar os métodos públicos
     return {
         getItems: getItems,
         insertItem: insertItem,

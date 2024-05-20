@@ -50,18 +50,17 @@ app.on('window-all-closed', () => {
 ipcMain.on("sqliteApi",(event,method,args) => {
   switch (method) {
     case 'create':
-      if(typeof(args.name) === undefined || typeof(args.blob) === undefined || typeof(args.tags) === undefined){
-        event.reply('read-response',{err : "Invalid Value"})
+      if(typeof(args.name) == 'undefined' || typeof(args.blob) == 'undefined' || typeof(args.tags) == 'undefined'){
+        event.reply('create-response',{err : "Invalid Value"})
       }else{
         sqltManager.insertItem(args.name, args.blob, args.tags, (err, lastID) => {
           if (err) {
             event.reply('create-response',{err : err})
           } 
           else {
-            event.reply('create-response',{data : lastID})
+            event.reply('create-response',{err: false , id : lastID})
           }
         })
-         console.log(args)
       }
     break;
     case 'read':
