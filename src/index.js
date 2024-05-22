@@ -73,7 +73,27 @@ ipcMain.on("sqliteApi",(event,method,args) => {
       })
     break;
     case 'update':
-      
+      sqltManager.getItems((err, rows) => {
+        if (err) {
+           console.log('erro')
+        } else {
+          rows.forEach(linha => {
+            if(args.id === linha.id){
+              const alterar = Object.keys(args.objeto)
+              alterar.forEach(nomeColuna => {
+                linha[nomeColuna] = args.objeto[nomeColuna]
+              })
+              sqltManager.updateItem(linha , (err) => {
+                if(err){
+                  event.reply('update-response',{err : err})
+                }else{
+                  event.reply('update-response',{err : false})
+                }
+              })
+            }
+          });
+        }
+      })
     break;
     case 'delete':
       sqltManager.deleteItem(args.id,(err,message) => {

@@ -28,8 +28,17 @@ var API = {
             ipcRenderer.send('sqliteApi','read')
         })
     },
-    update : (id,jsonObj) => {
-        ipcRenderer.send('sqliteApi','update',id,jsonObj)
+    update : (id,obj) => {
+        const jsonObject = {
+            id : id,
+            objeto : obj
+        }
+        return new Promise((resolve,reject) => {
+            ipcRenderer.once('update-response',(event,response) => {
+                resolve(response)
+            })
+            ipcRenderer.send('sqliteApi','update',jsonObject)
+        })
     },
     delete : (id)=>{
         const jsonObj = {

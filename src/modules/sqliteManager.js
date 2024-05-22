@@ -53,9 +53,23 @@ const sqltManager = (function() {
             }
         });
     }
+    function updateItem(args,callback){
+        const query = 'UPDATE arquivos SET nome = ?, payload = ?, tags = ? WHERE id = ?';
+
+        db.run(query, [args.nome, args.payload, args.tags, args.id], function(err) {
+            if (err) {
+                console.error('Erro ao alterar item:', err.message);
+                callback(err);
+            } else {
+                console.log(`Item alterado com sucesso`);
+                callback(null, true);
+            }
+        });
+    }
     return {
         getItems: getItems,
         insertItem: insertItem,
+        updateItem: updateItem,
         deleteItem: deleteItem,
         close: close
     };
