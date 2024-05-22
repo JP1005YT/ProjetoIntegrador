@@ -1,4 +1,4 @@
-const { app, BrowserWindow,ipcMain } = require('electron');
+const { app, BrowserWindow,ipcMain} = require('electron');
 const path = require('node:path');
 const sqltManager = require('./modules/sqliteManager');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
