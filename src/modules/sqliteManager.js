@@ -20,6 +20,9 @@ const sqltManager = (function() {
         });
     }
     function insertItem(nome, payload, tags, callback) {
+        // Limite de 50mb
+        // Realizar teste de sql inject
+        // Electron 20
         const tagsJson = JSON.stringify(tags)
         const query = 'INSERT INTO arquivos (nome, payload, tags) VALUES (?, ?, ?)';
         db.run(query, [nome, payload, tagsJson], function(err) {

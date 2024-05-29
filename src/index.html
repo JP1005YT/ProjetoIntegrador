@@ -11,6 +11,14 @@
     <script>
       var API
       API = window.preloadObject;
+      
+
+      let run = async () => {
+          let data = await API.read();
+          constructor(data.data);
+      };
+      run()
+
     </script>
   </body>
 </html>
