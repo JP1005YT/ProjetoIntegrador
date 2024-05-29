@@ -23,12 +23,12 @@ header{
   justify-content: space-between;
 }
 h1{
-  font-size: 45px;
+  font-size: 35px;
   color: #575757;
 }
 .buttons{
   height: 8vh;
-  width: 80vh;
+  width: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,23 +59,37 @@ main{
   grid-template-columns: repeat(4, 1fr);
   gap: 60px;
   padding: 10px;
-  border-style: dashed;
   border-width: 2px;
   border-color: #000;
 }
 .element{
   height: 250px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 15%;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border: 3px solid #000;
+  overflow: hidden;
 }
 .img{
   width: 90%;
   height: 90%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* .del{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    top: 0%;
+    right: 0%;
+    margin: 15px;
+    position: absolute;
+    background-color: #f02450;
+  } */
 }
 .description{
   width: 100%;
@@ -85,5 +99,5 @@ main{
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 0 0 30px 30px;
 }
