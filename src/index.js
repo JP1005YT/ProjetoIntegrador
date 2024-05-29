@@ -20,6 +20,16 @@ const createWindow = () => {
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
+  // mainWindow.loadURL()
+
+  // https://www.npmjs.com/package/concurrently
+  // Para abrir os 2 servidores
+
+      // scripts": {
+    //   "programando": "concurrently -k \"npm run dev\" \"wait-on tcp:5173 && npm run start\""
+    // },
+
+
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
