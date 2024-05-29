@@ -1,24 +1,84 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title> Objetos de Aprendizagem </title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <header> 
+      <h1> Objetos de Aprendizagem </h1>
+      <section class="buttons">
+        <button class="all"> TUDO </button>
+        <button class="text"> TEXTO </button>
+        <button class="audio"> ÁUDIO </button>
+        <button class="picture"> IMAGENS </button>
+      </section>
+    </header>
+    <main>
+      <section class="content">
+        <section class="element">
+          <section class="img"> Imagem de um Livro </section>
+          <section class="description"> Enredo Sherk 5 </section>
+        </section>
+        <section class="element">
+          <section class="img"> Imagem de um Livro </section>
+          <section class="description"> O Gato de Botas </section>
+        </section>
+        <section class="element">
+          <section class="img"> Imagem de uma Raposa </section>
+          <section class="description"> A Raposa e as Uvas </section>
+        </section>
+        <section class="element">
+          <section class="img"> Imagem de uma Raposa </section>
+          <section class="description"> A Raposa e as Uvas </section>
+        </section>
+        <section class="element">
+          <section class="img"> Icone de Som </section>
+          <section class="description"> Conto (João e o Pé de Feijão) </section>
+        </section>
+        <section class="element">
+          <section class="img"> Icone de Som </section>
+          <section class="description"> Conto (A Cigarra e a Formiga) </section>
+        </section>
+        <section class="element">
+          <section class="img"> Imagem de um sapo no poço </section>
+          <section class="description"> O Sapo e o Poço </section>
+        </section>
+        <section class="element">
+          <section class="img"> Imagem de um sapo no poço </section>
+          <section class="description"> O Sapo e o Poço </section>
+        </section>
+        <section class="element">
+          <section class="img"> Icone de Som </section>
+          <section class="description"> Conto (João e o Pé de Feijão) </section>
+        </section>
+        <section class="element">
+          <section class="img"> Icone de Som </section>
+          <section class="description"> Conto (A Cigarra e a Formiga) </section>
+        </section>
+        <section class="element">
+          <section class="img"> Imagem de um sapo no poço </section>
+          <section class="description"> O Sapo e o Poço </section>
+        </section>
+        <section class="element">
+          <section class="img"> Imagem de um sapo no poço </section>
+          <section class="description"> O Sapo e o Poço </section>
+        </section>
+      </section>
+    </main>
     <script>
       var API
       API = window.preloadObject;
-      
-
-      let run = async () => {
-          let data = await API.read();
-          constructor(data.data);
+      let run = async() => {
+        let data = await API.read();
+        console.log(data.data);
       };
       run()
-
+      function constructor(array){
+        document.createElement("section");
+      }
     </script>
   </body>
 </html>
