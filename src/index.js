@@ -61,10 +61,10 @@ app.on('window-all-closed', () => {
 ipcMain.on("sqliteApi",(event,method,args) => {
   switch (method) {
     case 'create':
-      if(typeof(args.name) == 'undefined' || typeof(args.blob) == 'undefined' || typeof(args.tags) == 'undefined'){
+      if(typeof(args.name) == 'undefined' || typeof(args.blob) == 'undefined' || typeof(args.tags) == 'undefined' || typeof(args.tipo) == 'undefined'){
         event.reply('create-response',{err : "Invalid Value"})
       }else{
-        sqltManager.insertItem(args.name, args.blob, args.tags, (err, lastID) => {
+        sqltManager.insertItem(args.name, args.blob, args.tags, args.tipo, (err, lastID) => {
           if (err) {
             event.reply('create-response',{err : err})
           } 

@@ -7,11 +7,12 @@ const { contextBridge, ipcRenderer } = require('electron');
 // console.log(Aprende)
 
 var API = {
-    create : (name,blob,tags) => {
+    create : (name,blob,tags,tipo) => {
         const jsonObj = {
             name : name,
             blob : blob,
-            tags : tags
+            tags : tags,
+            tipo : tipo,
         }
         return new Promise((resolve,reject) => {
             ipcRenderer.once('create-response',(event,response) => {
@@ -31,7 +32,7 @@ var API = {
     update : (id,obj) => {
         const jsonObject = {
             id : id,
-            objeto : obj
+            objeto : obj,
         }
         return new Promise((resolve,reject) => {
             ipcRenderer.once('update-response',(event,response) => {

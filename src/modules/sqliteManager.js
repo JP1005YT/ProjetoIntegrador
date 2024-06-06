@@ -19,13 +19,13 @@ const sqltManager = (function() {
             }
         });
     }
-    function insertItem(nome, payload, tags, callback) {
+    function insertItem(nome, payload, tags, tipo , callback) {
         // Limite de 50mb
         // Realizar teste de sql inject
         // Electron 20
         const tagsJson = JSON.stringify(tags)
-        const query = 'INSERT INTO arquivos (nome, payload, tags) VALUES (?, ?, ?)';
-        db.run(query, [nome, payload, tagsJson], function(err) {
+        const query = 'INSERT INTO arquivos (nome, payload, tags,tipo) VALUES (?, ?, ?, ?)';
+        db.run(query, [nome, payload, tagsJson,tipo], function(err) {
             if (err) {
                 console.error('Erro ao inserir item:', err.message);
                 callback(err);
@@ -57,9 +57,9 @@ const sqltManager = (function() {
         });
     }
     function updateItem(args,callback){
-        const query = 'UPDATE arquivos SET nome = ?, payload = ?, tags = ? WHERE id = ?';
+        const query = 'UPDATE arquivos SET nome = ?, payload = ?, tags = ?, tipo = ? WHERE id = ?';
 
-        db.run(query, [args.nome, args.payload, args.tags, args.id], function(err) {
+        db.run(query, [args.nome, args.payload, args.tags, args.id, args.tipo], function(err) {
             if (err) {
                 console.error('Erro ao alterar item:', err.message);
                 callback(err);
