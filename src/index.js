@@ -57,7 +57,6 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-
 ipcMain.on("sqliteApi",(event,method,args) => {
   switch (method) {
     case 'create':
