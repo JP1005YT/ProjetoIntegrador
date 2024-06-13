@@ -4,6 +4,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 // const sqlite = require('sqlite3').verbose();
 
+
 var API = {
     create : (name,blob,tags,tipo) => {
         const jsonObj = {
