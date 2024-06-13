@@ -77,4 +77,5 @@ const sqltManager = (function() {
         close: close
     };
 })();
+
 module.exports = sqltManager;
